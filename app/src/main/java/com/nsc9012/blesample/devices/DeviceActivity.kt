@@ -10,12 +10,19 @@ import android.bluetooth.le.ScanResult
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.wifi.WifiInfo
 import android.os.AsyncTask
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.provider.Settings
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.nsc9012.blesample.R
 import com.nsc9012.blesample.extensions.invisible
 import com.nsc9012.blesample.extensions.toast
@@ -75,10 +82,9 @@ class DeviceActivity : AppCompatActivity() {
                             progress_bar.invisible()
                             stopScanning()
 
-                            DB().getConnection()
-//                            conn.executeMySQLQuery("show databases;")
-//                            println(conn)
-//                            conn.executeMySQLQuery("SHOW DATABASES;")
+//                            val apiconn = WebAPIConnector()
+                            sendGet()
+
 
 
                         }
@@ -94,17 +100,29 @@ class DeviceActivity : AppCompatActivity() {
 
     }
 
-    @Throws(SQLException::class)
-    fun getConnection():Connection {
-        val conn:Connection
-        val connectionProps = Properties()
-        connectionProps.put("user", "root")
-        connectionProps.put("password", "G2Shouldhavewon")
-        conn = DriverManager.getConnection(
-            "jdbc:mysql://34.106.172.222:3306/covid",
-            connectionProps)
-        println("Connected to database")
-        return conn
+    fun sendGet() {
+        val queue = Volley.newRequestQueue(this)
+        val url = "http://34.106.238.170:5000/covid/FFFFFFFFFFFF"
+        val asdf = BluetoothAdapter.getDefaultAdapter()
+//        val a = asdf.
+//        val b = a.
+//        println(asdf.address)
+
+        // Request a string response from the provided URL.
+        val stringRequest = JsonObjectRequest(
+            Request.Method.GET, url, null,
+//            Request.Method.GET, url,
+//            Response.Listener<String> { response ->
+//                // Display the first 500 characters of the response string.
+//                println("Response is: " + response.toString())
+            Response.Listener { response ->
+                println("Response: " + response.toString())
+            },
+            Response.ErrorListener { error -> error.printStackTrace() })
+
+        queue.add(stringRequest)
+
+
     }
 
     private fun initBLE() {

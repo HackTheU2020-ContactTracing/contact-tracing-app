@@ -9,13 +9,28 @@
             android:id="@+id/button_discover"
             android:background="@android:color/white"
             android:textColor="@color/colorPrimary"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
+            android:layout_width="203dp"
+            android:layout_height="74dp"
             android:text="@string/start_scanning"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/recycler_view_devices"/>
+            app:layout_constraintBottom_toTopOf="@id/recycler_view_devices"
+            app:layout_constraintHorizontal_bias="0.0" />
+
+    <Button
+            android:id="@+id/button_discover2"
+            android:background="@android:color/white"
+            android:textColor="@color/colorPrimary"
+            android:layout_width="203dp"
+            android:layout_height="74dp"
+            android:text="Self Report Covid-19 Infection"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/recycler_view_devices"
+            app:layout_constraintHorizontal_bias="0.975"
+            app:layout_constraintVertical_bias="0.0" />
 
     <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view_devices"
